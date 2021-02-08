@@ -1,0 +1,24 @@
+version: '3.3'
+
+networks:
+  web:
+
+services:
+  chrome:
+    image: selenium/standalone-chrome:latest
+    hostname: chrome
+    networks:
+      - web
+    ports:
+      - "5900:5900"
+      - "4444:4444"
+    privileged: true
+    shm_size: 2g
+    environment:
+      - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
+  tests:
+    build: .
+    networks:
+      - web
+    depends_on:
+      - chrome
