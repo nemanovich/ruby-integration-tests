@@ -8,6 +8,6 @@ When(/^I get "(.*)"$/) do |path|
   @last_response = Faraday.get path
 end
 
-And(/^the JSON array should have value (\d+) for key (.*) for all entries$/) do |value, key|
+Then(/^the JSON array should have value (\d+) for key (.*) for all entries$/) do |value, key|
   expect(parse_json(last_json)).to all(include(key => value))
 end
